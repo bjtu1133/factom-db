@@ -1,0 +1,13 @@
+.terminal-container {
+    padding: 12px !important;
+    
+}
+.terminal {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom:24px;
+    height: 72px;
+}
+.dropdown-item {
+    padding: 6px;
+}
