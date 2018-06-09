@@ -1,6 +1,5 @@
 .terminal-container {
     padding: 24px !important;
-    
 }
 .terminal {
     display: flex;
@@ -28,6 +27,7 @@
 }
 
 .create-chain {
+    padding-top: 32px;
     padding-left: 32px;
     padding-right: 32px;
     padding-bottom: 32px;
@@ -37,4 +37,44 @@
 }
 .create-chain-content {
     height: 120px;
+}
+.search-page {
+    height: 212px;
+    padding-top: 24px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 32px;
+}
+.search-card {
+    margin-bottom:32px;
+    padding-left: 32px;
+    padding-top:6px;
+    padding-bottom:12px;
+    width: 600px;
+}
+.search-card button {
+    margin-left:32px;
+}
+
+.retrieve-entry {
+    height: 212px;
+    padding-top: 24px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 32px;
+}
+
+.chain-id-input {
+    width: 60%;
+}
+
+.retrieve-card {
+    margin-bottom:32px;
+    padding-left: 32px;
+    padding-top:6px;
+    padding-bottom:12px;
+}
+
+.retrieve-card button {
+    margin-left: 32px;
 }
