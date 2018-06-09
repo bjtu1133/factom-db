@@ -17,6 +17,8 @@ import { observer } from 'mobx-react';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import axios from 'axios';
+
 @observer
 export class CreateChain extends React.Component {
     @observable private activeStep=0;
@@ -82,11 +84,14 @@ export class CreateChain extends React.Component {
         );
     }
 
+    public async createEntry() {
+       await axios.get(`http://webshot.weku.io:7000/new?url=eee`);
+    }
+
     private renaderUrlTextField = () => {
         return (
             <TextField
                 label="URL"
-                value={this.url}
                 onChange={this.onUrlChange}
                 placeholder="e.g. https://google.com"
                 className="url-input"
@@ -158,13 +163,16 @@ export class CreateChain extends React.Component {
     get finished () {
         return this.activeStep === this.steps.length && this.url;
     }
-
+    @action
     private handleNext = () => {
         if (this.isStepSkipped(this.activeStep)) {
           this.skipped = new Set(this.skipped.values());
           this.skipped.delete(this.activeStep);
         }
         this.activeStep ++;
+        if (this.activeStep >= this.steps.length) {
+            this.createEntry();
+        }
     };
     @action
     private  handleBack = () => {
