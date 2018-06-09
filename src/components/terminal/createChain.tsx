@@ -10,8 +10,12 @@ import Typography from '@material-ui/core/Typography';
 
 import TextField from '@material-ui/core/TextField';
 
+import Chip from '@material-ui/core/Chip';
+
 import { action, computed, observable } from 'mobx';
 import { observer } from 'mobx-react';
+
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 @observer
 export class CreateChain extends React.Component {
@@ -19,10 +23,13 @@ export class CreateChain extends React.Component {
     @observable private skipped = new Set<number>();
     @observable private url: string;
     @observable private description: string;
+    @observable private tag: string;
+    @observable private tags =  [] as string[];
+
     public render() {
         return (
-            <div>
-                <Stepper activeStep={this.activeStep}>
+            <div className="create-chain">
+                <Stepper activeStep={this.activeStep} className="create-chain-steper">
                     {this.steps.map((label, index) => {
                         const props = {} as {completed: boolean};
                         const labelProps = {} as {optional: any};
@@ -39,20 +46,11 @@ export class CreateChain extends React.Component {
                         );
                     })}
                 </Stepper>
-                <div>
-                    {this.activeStep === this.steps.length ? (
-                        <div>
-                            <Typography>
-                                All steps completed - you&quot;re finished
-                            </Typography>
-                            <Button onClick={this.handleReset}>
-                                Reset
-                            </Button>
-                        </div>
-                    ) : (
+                <div className="create-chain-content">
+                    {this.finished ? ( <CircularProgress size={50} />) : (
                             <div>
-                                <Typography>{this.getStepContent(this.activeStep)}</Typography>
-                                <div>
+                                {this.getStepContent(this.activeStep)}
+                                <div className="create-chain-buttons">
                                     <Button
                                         disabled={this.activeStep === 0}
                                         onClick={this.handleBack}
@@ -72,6 +70,7 @@ export class CreateChain extends React.Component {
                                         variant="contained"
                                         color="primary"
                                         onClick={this.handleNext}
+                                        disabled={!!!this.url}
                                     >
                                         {this.activeStep === this.steps.length - 1 ? 'Create Entry' : 'Next'}
                                     </Button>
@@ -89,6 +88,8 @@ export class CreateChain extends React.Component {
                 label="URL"
                 value={this.url}
                 onChange={this.onUrlChange}
+                placeholder="e.g. https://google.com"
+                className="url-input"
                 margin="normal"
         />);
     }
@@ -96,13 +97,36 @@ export class CreateChain extends React.Component {
     private renderAddDescription = () => {
         return (
             <TextField
-                label="URL"
+                className="description-input"
+                label="Description"
                 value={this.description}
                 onChange={this.onDescriptionChange}
+                placeholder="e.g. This Entry is about..."
                 margin="normal"
             />
         );
-    } 
+    }
+
+    private renderAddTags = () => {
+        return (
+            <div>
+                <TextField
+                    label="Tag"
+                    value={this.tag}
+                    onChange={this.onTagChange}
+                    placeholder="e.g. Important"
+                    margin="normal"
+                />
+                <Button 
+                    color="primary"
+                    onClick={this.onAddTag}>
+                    Add
+                </Button>
+                {this.tags.map(tag => (<Chip onDelete={this.handleRemoveChip(tag)} label={tag} />))}
+                
+            </div>
+        );
+    }
 
     private isStepOptional = (step: number) => {
         return step === 1;
@@ -117,7 +141,7 @@ export class CreateChain extends React.Component {
             case 0:
                 return this.renaderUrlTextField();
             case 1:
-                return 'Add Tags for your entry';
+                return this.renderAddTags();
             case 2:
                 return this.renderAddDescription();
             default:
@@ -128,6 +152,11 @@ export class CreateChain extends React.Component {
     @computed
     get steps() {
         return ['Input target URL', 'Add Tags for your entry', 'Add a Description'];
+    }
+
+    @computed
+    get finished () {
+        return this.activeStep === this.steps.length && this.url;
     }
 
     private handleNext = () => {
@@ -152,10 +181,6 @@ export class CreateChain extends React.Component {
         this.skipped.add(this.activeStep);
         this.activeStep ++;
     };
-    @action
-    private handleReset = () => {
-        this.activeStep = 0;
-    };
 
     @action
     private onUrlChange = (event: any) => {
@@ -165,5 +190,26 @@ export class CreateChain extends React.Component {
     @action
     private onDescriptionChange = (event: any) => {
         this.description = event.target.value;
+    }
+
+    @action
+    private onAddTag = () => {
+        if (this.tag) {
+            this.tags.push(`${this.tag}`);
+        }
+    }
+
+    @action
+    private onTagChange = (event: any) => {
+        this.tag = event.target.value;
+    }
+
+    @action
+    private removeTag = (tag: string) => {
+        this.tags = this.tags.filter(t => t !== tag);
+    }
+
+    private handleRemoveChip = (tag: string) => () => {
+        this.removeTag(tag);
     }
 }

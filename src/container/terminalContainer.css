@@ -1,5 +1,5 @@
 .terminal-container {
-    padding: 12px !important;
+    padding: 24px !important;
     
 }
 .terminal {
@@ -10,4 +10,31 @@
 }
 .dropdown-item {
     padding: 6px;
+}
+.url-input {
+    width: 50%;
+}
+
+.description-input {
+    width: 50%;
+}
+
+.create-chain-buttons {
+    padding-top: 16px;
+}
+
+.create-chain-buttons button {
+    margin-right: 32px;
+}
+
+.create-chain {
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 32px;
+}
+.create-chain-steper {
+    background-color: lightgray !important;
+}
+.create-chain-content {
+    height: 120px;
 }
