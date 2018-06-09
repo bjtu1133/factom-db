@@ -3,8 +3,6 @@ import CardContent from '@material-ui/core/CardContent';
 
 import * as React from 'react';
 
-import { TerminalConsole } from '../components/terminal/terminalConsole';
-
 import { CreateChain } from '../components/terminal/createChain';
 
 import './terminalContainer.css'
@@ -35,7 +33,6 @@ export class TerminalContainer extends React.Component {
                     {this.pageNum === 0 && <CreateChain />}
                     {this.pageNum === 1 && <SearchPage />}
                     {this.pageNum === 2 && <RetrieveEntry />}
-                    <TerminalConsole />
                 </CardContent>
             </Card>
         );
