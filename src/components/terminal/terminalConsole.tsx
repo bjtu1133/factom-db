@@ -38,6 +38,7 @@ export class TerminalConsole extends React.Component {
                 <Tabs value={this.value} onChange={this.handleSwitchTab}>
                     <Tab label="Result" />
                     <Tab label="Console" />
+                    <Tab label="Snapshot" />
                 </Tabs>
                 {this.value === 0 && 
                     <Table>
@@ -65,6 +66,10 @@ export class TerminalConsole extends React.Component {
                         <li>Updating...</li>
                         <li>Done!</li>
                     </ul>
+                }
+                {
+                    this.value === 3 &&
+                    <div>snapshot </div>
                 }
             </Paper>
         );
