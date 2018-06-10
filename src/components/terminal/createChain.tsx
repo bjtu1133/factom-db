@@ -152,7 +152,7 @@ export class CreateChain extends React.Component {
     }
 
     private isStepOptional = (step: number) => {
-        return step === 1;
+        return step === 1 || step === 2;
     }
 
     private isStepSkipped = (step: number) => {

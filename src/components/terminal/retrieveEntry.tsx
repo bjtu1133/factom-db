@@ -5,7 +5,8 @@ import { action, observable } from 'mobx';
 import TextField from '@material-ui/core/TextField';
 
 import Button from '@material-ui/core/Button';
-import { Card } from 'material-ui';
+
+import Card from '@material-ui/core/Card';
 
 import axios from 'axios';
 
@@ -14,11 +15,11 @@ import { observer } from 'mobx-react';
 export class RetrieveEntry extends React.Component {
     @observable private chainId: string;
     @observable private result: any;
-    
+
     public render() {
         return (
             <div className="retrieve-entry">
-                <Card className="retrieve-card"> 
+                <Card className="retrieve-card">
                     <div>
                         <TextField
                             className="chain-id-input"
@@ -29,10 +30,10 @@ export class RetrieveEntry extends React.Component {
                         <Button variant="contained" color="primary" onClick={this.handleRetrieve}>Retrieve By Weshot ID</Button>
                     </div>
                 </Card>
-                {!!this.result && <Card className="retrieve-card"> 
-                    <div>
-                        {this.result}
-                    </div>
+                {!!this.result && <Card className="retrieve-card-result">
+                        <img
+                            src={this.result}
+                        />
                 </Card>}
             </div>
         );
@@ -40,12 +41,12 @@ export class RetrieveEntry extends React.Component {
 
     @action
     public async retrieveEntry() {
-       const response = await axios.get(`http://webshot.weku.io:7000/get?chainId=${this.chainId}`);
-       this.result = response.data;
+        const response = await axios.get(`http://webshot.weku.io:7000/get?chainId=${this.chainId}`);
+        this.result = response.data;
     }
 
     @action
-    private handleRetrieve= () => {
+    private handleRetrieve = () => {
         this.retrieveEntry();
     }
 
