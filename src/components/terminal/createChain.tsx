@@ -172,7 +172,7 @@ export class CreateChain extends React.Component {
 
     @computed
     get steps() {
-        return ['Input target URL', 'Add Tags for your entry', 'Add a Description'];
+        return ['Input Target URL', 'Add Tags for your entry', 'Add a Description'];
     }
 
     @computed
