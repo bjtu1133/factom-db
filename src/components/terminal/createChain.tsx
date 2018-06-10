@@ -27,7 +27,7 @@ export class CreateChain extends React.Component {
     @observable private description: string;
     @observable private tag: string;
     @observable private tags =  [] as string[];
-
+    @observable private chainId: string | undefined = undefined;
     public render() {
         return (
             <div className="create-chain">
@@ -49,7 +49,7 @@ export class CreateChain extends React.Component {
                     })}
                 </Stepper>
                 <div className="create-chain-content">
-                    {this.finished ? ( <CircularProgress size={50} />) : (
+                    {this.finished ? (this.renderResult()) : (
                             <div>
                                 {this.getStepContent(this.activeStep)}
                                 <div className="create-chain-buttons">
@@ -84,8 +84,10 @@ export class CreateChain extends React.Component {
         );
     }
 
+    @action
     public async createEntry() {
-       await axios.get(`http://webshot.weku.io:7000/new?url=eee`);
+       const response = await axios.get(`http://webshot.weku.io:7000/new?url=${this.url}&tags=${this.tags}`);
+       this.chainId = response.data;
     }
 
     private renaderUrlTextField = () => {
@@ -110,6 +112,15 @@ export class CreateChain extends React.Component {
                 margin="normal"
             />
         );
+    }
+
+    private renderResult = () => {
+        return ( 
+            <div>
+                {!this.chainId && <CircularProgress size={50} />}
+                {this.chainId && <Button onClick={this.handleCopyResult}>{this.chainId}</Button>}
+            </div>
+        )
     }
 
     private renderAddTags = () => {
@@ -219,5 +230,10 @@ export class CreateChain extends React.Component {
 
     private handleRemoveChip = (tag: string) => () => {
         this.removeTag(tag);
+    }
+
+    @action
+    private handleCopyResult = () => {
+       alert('copied');
     }
 }

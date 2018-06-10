@@ -12,6 +12,7 @@
     "mobx": "^5.0.0",
     "mobx-react": "^5.2.0",
     "react": "^16.4.0",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.4.0",
     "react-scripts-ts": "2.16.0"
   },

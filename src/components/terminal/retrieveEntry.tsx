@@ -16,7 +16,7 @@ export class RetrieveEntry extends React.Component {
                     <div>
                         <TextField
                             className="chain-id-input"
-                            label="Chain ID"
+                            label="Webshot ID"
                             value={this.chainId}
                             onChange={this.onChainIdChange}
                             margin="normal"

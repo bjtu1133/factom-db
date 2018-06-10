@@ -26,9 +26,9 @@ export class TerminalContainer extends React.Component {
             <Card>
                 <CardContent className="terminal-container">
                     <Tabs value={this.pageNum} onChange={this.handleSwitchPage}>
-                        <Tab label="Create An Entry" />
-                        <Tab label="Search Existing Entries" />
-                        <Tab label="Retrieve An Previous Entry" />
+                        <Tab label="Create An Schreenshot" />
+                        <Tab label="Search" />
+                        <Tab label="Retrieve an Webshot" />
                     </Tabs>
                     {this.pageNum === 0 && <CreateChain />}
                     {this.pageNum === 1 && <SearchPage />}

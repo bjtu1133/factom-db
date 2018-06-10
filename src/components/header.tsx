@@ -5,7 +5,7 @@ export class Header extends React.Component {
     public render() {
         return (
             <AppBar
-                title="FActom Webshot"
+                title="Factom Webshot Bash"
                 iconClassNameRight="muidocs-icon-navigation-expand-more"
             />
         );
