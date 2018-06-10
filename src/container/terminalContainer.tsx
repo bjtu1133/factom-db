@@ -39,6 +39,8 @@ export class TerminalContainer extends React.Component {
     }
     @action
     private handleSwitchPage = (event: any, value: number) => {
-        this.pageNum = value;
+        if(value !== 1) {
+            this.pageNum = value;
+        }
     }
 }
