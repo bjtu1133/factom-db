@@ -26,7 +26,7 @@ export class RetrieveEntry extends React.Component {
                             onChange={this.onChainIdChange}
                             margin="normal"
                         />
-                        <Button variant="contained" color="primary" onClick={this.handleRetrieve}>Retrieve By Chain ID</Button>
+                        <Button variant="contained" color="primary" onClick={this.handleRetrieve}>Retrieve By Weshot ID</Button>
                     </div>
                 </Card>
                 {!!this.result && <Card className="retrieve-card"> 
