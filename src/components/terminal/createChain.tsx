@@ -21,6 +21,8 @@ import axios from 'axios';
 
 import Card from '@material-ui/core/Card';
 
+import { Clipboard } from 'ts-clipboard';
+
 @observer
 export class CreateChain extends React.Component {
     @observable public description: string;
@@ -239,6 +241,7 @@ export class CreateChain extends React.Component {
 
     @action
     private handleCopyResult = () => {
-       alert('copied');
+        const chainId = `${this.chainId}`;
+        Clipboard.copy(chainId);
     }
 }
