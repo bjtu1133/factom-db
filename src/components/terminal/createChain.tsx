@@ -19,12 +19,14 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import axios from 'axios';
 
+import Card from '@material-ui/core/Card';
+
 @observer
 export class CreateChain extends React.Component {
+    @observable public description: string;
     @observable private activeStep=0;
     @observable private skipped = new Set<number>();
     @observable private url: string;
-    @observable private description: string;
     @observable private tag: string;
     @observable private tags =  [] as string[];
     @observable private chainId: string | undefined = undefined;
@@ -106,7 +108,6 @@ export class CreateChain extends React.Component {
             <TextField
                 className="description-input"
                 label="Description"
-                value={this.description}
                 onChange={this.onDescriptionChange}
                 placeholder="e.g. This Entry is about..."
                 margin="normal"
@@ -118,7 +119,11 @@ export class CreateChain extends React.Component {
         return ( 
             <div>
                 {!this.chainId && <CircularProgress size={50} />}
-                {this.chainId && <Button onClick={this.handleCopyResult}>{this.chainId}</Button>}
+                {this.chainId && 
+                    <Card className="create-result-card">
+                        <Button onClick={this.handleCopyResult}>{this.chainId}</Button>
+                    </Card>
+                }
             </div>
         )
     }

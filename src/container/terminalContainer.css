@@ -78,3 +78,15 @@
 .retrieve-card button {
     margin-left: 32px;
 }
+
+.create-result-card {
+    margin-bottom:32px;
+    padding-left: 32px;
+    padding-top:6px;
+    padding-bottom:12px;
+    margin-top:32px;
+}
+
+.create-result-card button {
+    margin-left: 32px;
+}

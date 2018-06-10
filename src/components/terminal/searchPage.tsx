@@ -8,8 +8,8 @@ import Button from '@material-ui/core/Button';
 import { Card } from 'material-ui';
 
 export class SearchPage extends React.Component {
-    @observable private  tag: string;
-    @observable private description: string;
+    @observable public tag: string;
+    @observable public description: string;
     public render() {
         return (
             <div className="search-page">
@@ -17,7 +17,6 @@ export class SearchPage extends React.Component {
                     <div>
                         <TextField
                             label="Description"
-                            value={this.description}
                             onChange={this.onDescriptionChange}
                             margin="normal"
                         />
@@ -28,7 +27,6 @@ export class SearchPage extends React.Component {
                 <Card className="search-card"> 
                     <TextField
                         label="Tag"
-                        value={this.tag}
                         onChange={this.onTagChange}
                         margin="normal"
                     />

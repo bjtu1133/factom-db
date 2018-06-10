@@ -7,8 +7,14 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Card } from 'material-ui';
 
+import axios from 'axios';
+
+import { observer } from 'mobx-react';
+@observer
 export class RetrieveEntry extends React.Component {
     @observable private chainId: string;
+    @observable private result: any;
+    
     public render() {
         return (
             <div className="retrieve-entry">
@@ -17,20 +23,30 @@ export class RetrieveEntry extends React.Component {
                         <TextField
                             className="chain-id-input"
                             label="Webshot ID"
-                            value={this.chainId}
                             onChange={this.onChainIdChange}
                             margin="normal"
                         />
-                        <Button variant="contained" color="primary" onClick={this.retrieve}>Retrieve By Chain ID</Button>
+                        <Button variant="contained" color="primary" onClick={this.handleRetrieve}>Retrieve By Chain ID</Button>
                     </div>
                 </Card>
+                {!!this.result && <Card className="retrieve-card"> 
+                    <div>
+                        {this.result}
+                    </div>
+                </Card>}
             </div>
         );
     }
 
     @action
-    private retrieve = () => {
-        alert(this.chainId);
+    public async retrieveEntry() {
+       const response = await axios.get(`http://webshot.weku.io:7000/get?chainId=${this.chainId}`);
+       this.result = response.data;
+    }
+
+    @action
+    private handleRetrieve= () => {
+        this.retrieveEntry();
     }
 
     @action
